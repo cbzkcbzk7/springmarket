@@ -1,26 +1,31 @@
-name: Spring-boot CI with Gradle
+name: SpringBoot TEST CI with Gradle
 
+# 하기 내용에 해당하는 이벤트 발생 시 github action 동작
 on:
-  push:
-    branches:[ "master" ]
+  push: # feature/*와 develop 브랜치에서 push가 일어났을 때 github action 동작
+    branches:
+      - 'master'
+
+# 참고사항
+# push가 일어난 브랜치에 PR이 존재하면, push에 대한 이벤트와 PR에 대한 이벤트 모두 발생합니다.
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  build: 
+    runs-on: ubuntu-latest # 실행 환경 지정
 
     steps:
-      - uses: actions/checkout@v3
-      - name: set up JDK 11
-        uses: actions/setup-java@v3
-        with:
-          java-version: '11'
-          distribution: 'temurin'
-          cache: gradle
+      - uses: actions/checkout@v2 # github action 버전 지정(major version)
 
-     - name: Grant execute permisstion for gradlew
-       run: chmod +x gradlew
-     - name: Checked Code Format
-       run: ./gradlew ktlintCheck
-      # Run Test Case
-      - name: Gradle Run Test
+      - name: Set up JDK 11 # JAVA 버전 지정
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11 
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Build with Gradle # 실제 application build(-x 옵션을 통해 test는 제외)
+        run: ./gradlew build -x test
+
+      - name: Test with Gradle # test application build
         run: ./gradlew test
