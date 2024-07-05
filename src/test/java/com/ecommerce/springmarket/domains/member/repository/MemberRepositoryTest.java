@@ -30,7 +30,7 @@ class MemberRepositoryTest {
     void save(){
         // given
         Member member = Member.builder()
-                .email("test@email.com")
+                .email("test@email.com1")
                 .pwd("1111")
                 .build();
 
