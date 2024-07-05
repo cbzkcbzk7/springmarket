@@ -20,4 +20,7 @@ public interface MemberRepository extends JpaRepository<Member,Long> {
 
     Member save(Member member);
     Member findByEmail(String email);
+    long count();
+
+
 }

@@ -29,18 +29,61 @@ class MemberRepositoryTest {
     @Test
     void save(){
         // given
-        Member member = Member.builder()
-                .email("test@email.com")
-                .pwd("1111")
+        Member member1 = Member.builder()
+                                .email("test1@email.com")
+                                .pwd("1111")
+                .build();
+
+        Member member2 = Member.builder()
+                                .email("test2@email.com")
+                                .pwd("2222")
+                .build();
+
+        Member member3 = Member.builder()
+                                .email("test3@email.com")
+                                .pwd("333")
                 .build();
 
         // when
-        Member saveMember = memberRepository.save(member);
-        Member findMember = memberRepository.findByEmail(member.getEmail());
+        Member saveMember1 = memberRepository.save(member1);
+
+                             memberRepository.save(member2);
+                             memberRepository.save(member3);
+
+        Member findMember = memberRepository.findByEmail(member1.getEmail());
+        Long    countAll   = memberRepository.count();
 
         // then
-        assertThat(saveMember.getEmail()).isEqualTo("test@email.com");
-        assertThat(saveMember.getEmail()).isEqualTo(findMember.getEmail());
+        assertThat(saveMember1.getEmail()).isEqualTo("test1@email.com");
+        assertThat(saveMember1.getEmail()).isEqualTo(findMember.getEmail());
+
+        assertThat(countAll).isEqualTo(3);
+    }
+    @Test
+    void findByEmail(){
+        //given
+        Member member1 = Member.builder()
+                                .email("test2@email.com")
+                                .pwd("2222")
+                .build();
+
+
+        Member member2 = Member.builder()
+                                .email("test3@email.com")
+                                .pwd("3333")
+                .build();
+
+
+        //when
+        Member saveMember = memberRepository.save(member1);
+        Member findMember = memberRepository.findByEmail(saveMember.getEmail());
+
+        Member findNullMember = memberRepository.findByEmail(member2.getEmail());
+
+        //then
+        assertThat(findMember.getEmail()).isEqualTo("test2@email.com");  // 찾는 email이 있을 경우
+        assertThatThrownBy(()-> findNullMember.getEmail())
+                .isInstanceOf(NullPointerException.class);
 
     }
 }
