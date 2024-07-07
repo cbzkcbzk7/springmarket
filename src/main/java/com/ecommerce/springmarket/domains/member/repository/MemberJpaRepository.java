@@ -1,24 +1,23 @@
 package com.ecommerce.springmarket.domains.member.repository;
 
 import com.ecommerce.springmarket.domains.member.domain.Member;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
 /**
  * packageName    : com.ecommerce.springmarket.domains.member.repository
- * fileName       : MemberRepository
+ * fileName       : MemberJpaRepository
  * author         : Sora
- * date           : 2024-07-07
- * description    :
+ * date           : 2024-07-05
+ * description    : This is for a JPA interface of member
  * ===========================================================
  * DATE              AUTHOR             NOTE
  * -----------------------------------------------------------
- * 2024-07-07        Sora       최초 생성
+ * 2024-07-05        Sora       최초 생성
  */
-public interface MemberRepository {
+public interface MemberJpaRepository extends JpaRepository<Member,Long> {
 
-    Member save(Member member);
     Optional<Member> findByEmail(String email);
 
-    long count();
 }

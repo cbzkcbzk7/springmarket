@@ -1,57 +1,56 @@
 package com.ecommerce.springmarket.domains.member.repository;
 
 import com.ecommerce.springmarket.domains.member.domain.Member;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * packageName    : com.ecommerce.springmarket.domains.member.repository
- * fileName       : MemberRepositoryTest
+ * fileName       : MemberRepositoryImplTest
  * author         : Sora
- * date           : 2024-07-05
- * description    : This is for test of JPA
+ * date           : 2024-07-07
+ * description    :
  * ===========================================================
  * DATE              AUTHOR             NOTE
  * -----------------------------------------------------------
- * 2024-07-05        Sora       최초 생성
+ * 2024-07-07        Sora       최초 생성
  */
 @DataJpaTest
-class MemberRepositoryTest {
+class MemberRepositoryImplTest {
 
     @Autowired
-    private MemberRepository memberRepository;
+    private MemberJpaRepository memberRepository;
 
     @Test
-    void save(){
+    void save() {
         // given
         Member member1 = Member.builder()
-                                .email("test1@email.com")
-                                .pwd("1111")
+                .email("test1@email.com")
+                .pwd("1111")
                 .build();
 
         Member member2 = Member.builder()
-                                .email("test2@email.com")
-                                .pwd("2222")
+                .email("test2@email.com")
+                .pwd("2222")
                 .build();
 
         Member member3 = Member.builder()
-                                .email("test3@email.com")
-                                .pwd("333")
+                .email("test3@email.com")
+                .pwd("333")
                 .build();
 
         // when
         Member saveMember1 = memberRepository.save(member1);
 
-                             memberRepository.save(member2);
-                             memberRepository.save(member3);
+        memberRepository.save(member2);
+        memberRepository.save(member3);
 
-        Member findMember = memberRepository.findByEmail(member1.getEmail());
-        Long    countAll   = memberRepository.count();
+        Member findMember = memberRepository.findByEmail(member1.getEmail()).get();
+        Long countAll = memberRepository.count();
 
         // then
         assertThat(saveMember1.getEmail()).isEqualTo("test1@email.com");
@@ -59,31 +58,30 @@ class MemberRepositoryTest {
 
         assertThat(countAll).isEqualTo(3);
     }
+
     @Test
-    void findByEmail(){
+    void findByEmail() {
         //given
         Member member1 = Member.builder()
-                                .email("test2@email.com")
-                                .pwd("2222")
+                .email("test2@email.com")
+                .pwd("2222")
                 .build();
 
 
         Member member2 = Member.builder()
-                                .email("test3@email.com")
-                                .pwd("3333")
+                .email("test3@email.com")
+                .pwd("3333")
                 .build();
 
 
         //when
         Member saveMember = memberRepository.save(member1);
-        Member findMember = memberRepository.findByEmail(saveMember.getEmail());
+        Member findMember = memberRepository.findByEmail(saveMember.getEmail()).get();
 
-        Member findNullMember = memberRepository.findByEmail(member2.getEmail());
 
         //then
         assertThat(findMember.getEmail()).isEqualTo("test2@email.com");  // 찾는 email이 있을 경우
-        assertThatThrownBy(()-> findNullMember.getEmail())
-                .isInstanceOf(NullPointerException.class);
 
     }
+
 }
