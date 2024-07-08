@@ -23,7 +23,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class MemberRepositoryImplTest {
 
     @Autowired
-    private MemberJpaRepository memberRepository;
+    private MemberJpaRepository memberJpaRepository;
 
     @Test
     void save() {
@@ -44,13 +44,14 @@ class MemberRepositoryImplTest {
                 .build();
 
         // when
-        Member saveMember1 = memberRepository.save(member1);
+        Member saveMember1 = memberJpaRepository.save(member1);
 
-        memberRepository.save(member2);
-        memberRepository.save(member3);
+        memberJpaRepository.save(member2);
+        memberJpaRepository.save(member3);
 
-        Member findMember = memberRepository.findByEmail(member1.getEmail()).get();
-        Long countAll = memberRepository.count();
+        Member findMember = memberJpaRepository.findByEmail(member1.getEmail()).get();
+        Long countAll = memberJpaRepository.count();
+
 
         // then
         assertThat(saveMember1.getEmail()).isEqualTo("test1@email.com");
@@ -75,8 +76,9 @@ class MemberRepositoryImplTest {
 
 
         //when
-        Member saveMember = memberRepository.save(member1);
-        Member findMember = memberRepository.findByEmail(saveMember.getEmail()).get();
+        Member saveMember = memberJpaRepository.save(member1);
+        Member findMember = memberJpaRepository.findByEmail(saveMember.getEmail()).get();
+
 
 
         //then

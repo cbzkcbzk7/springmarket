@@ -1,5 +1,6 @@
 package com.ecommerce.springmarket.domains.member.domain;
 
+import com.ecommerce.springmarket.domains.member.dtos.Login;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -8,6 +9,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.Optional;
 
 /**
  * packageName    : com.ecommerce.springmarket.domains.member.domain
@@ -32,4 +35,12 @@ public class Member {
     private Long id;
     private String email;
     private String pwd;
+
+
+    public static Login of(Member member){
+        return Login.builder()
+                .email(member.getEmail())
+                .pwd(member.getPwd())
+                .build();
+    }
 }

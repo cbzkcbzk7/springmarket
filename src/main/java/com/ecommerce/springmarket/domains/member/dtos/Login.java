@@ -1,6 +1,8 @@
 package com.ecommerce.springmarket.domains.member.dtos;
 
+import com.ecommerce.springmarket.domains.member.domain.Member;
 import jakarta.validation.constraints.NotBlank;
+import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,6 +19,8 @@ import lombok.Setter;
  * 2024-07-04        Sora       최초 생성
  */
 @Getter
+@Setter
+@Builder
 public class Login {
 
     @NotBlank
@@ -24,4 +28,11 @@ public class Login {
 
     @NotBlank
     private String pwd;
+
+    public Member toEntity(Login login){
+        return Member.builder()
+                .email(login.email)
+                .pwd(login.pwd)
+                .build();
+    }
 }

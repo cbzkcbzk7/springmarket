@@ -1,6 +1,7 @@
 package com.ecommerce.springmarket.domains.member.repository;
 
 import com.ecommerce.springmarket.domains.member.domain.Member;
+import com.ecommerce.springmarket.domains.member.dtos.Login;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,20 +24,20 @@ import java.util.Optional;
 @Repository
 public class MemberRepositoryImpl implements MemberRepository{
 
-    private final MemberJpaRepository repository;
+    private final MemberJpaRepository memberJpaRepository;
 
     @Override
     public Member save(Member member) {
-        return repository.save(member);
+        return memberJpaRepository.save(member);
     }
 
     @Override
     public Optional<Member> findByEmail(String email) {
-        return repository.findByEmail(email);
+       return memberJpaRepository.findByEmail(email);
     }
 
     @Override
     public long count() {
-        return repository.count();
+        return memberJpaRepository.count();
     }
 }
