@@ -66,7 +66,7 @@ class MemberServiceImplTest {
     void save(){
         //given
         Login login1 = Login.builder()
-                .email("test1@gmail.com")
+                .email("test1@email.com")
                 .pwd("12345")
                 .build();
 
@@ -75,7 +75,7 @@ class MemberServiceImplTest {
         login1.setPwd(encodedPassword1);
 
         Login login2 = Login.builder()
-                        .email("test2@gmail.com")
+                        .email("test2@email.com")
                                 .pwd("1111")
                                         .build();
 
@@ -109,12 +109,20 @@ class MemberServiceImplTest {
     @Test
     void findByEmail(){
         // given
+        Login login1 = Login.builder()
+                .email("test1@email.com")
+                .pwd("1111")
+                .build();
+
+
+        Member member1 = login1.toEntity(login1);
 
         // when
+        memberRepository.save(member1);
+        Member foundMember = memberRepository.findByEmail(login1.getEmail()).get();
 
         // then
-
-
+        assertThat(foundMember.getEmail()).isEqualTo("test1@email.com");
 
     }
 

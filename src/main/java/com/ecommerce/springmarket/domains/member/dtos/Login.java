@@ -2,10 +2,7 @@ package com.ecommerce.springmarket.domains.member.dtos;
 
 import com.ecommerce.springmarket.domains.member.domain.Member;
 import jakarta.validation.constraints.NotBlank;
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 /**
  * packageName    : com.ecommerce.springmarket.domains.member.dtos
@@ -18,8 +15,11 @@ import lombok.Setter;
  * -----------------------------------------------------------
  * 2024-07-04        Sora       최초 생성
  */
+@ToString
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class Login {
 

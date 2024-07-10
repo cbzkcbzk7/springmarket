@@ -17,6 +17,6 @@ public interface MemberService {
 
     Login save(Login login);
 
-    Login findByEmail(String email);
+    Login findByEmail(Login login);
 
 }

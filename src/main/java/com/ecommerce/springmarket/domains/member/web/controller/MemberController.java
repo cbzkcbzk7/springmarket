@@ -2,6 +2,8 @@ package com.ecommerce.springmarket.domains.member.web.controller;
 
 
 import com.ecommerce.springmarket.domains.member.dtos.Login;
+import com.ecommerce.springmarket.domains.member.service.MemberService;
+import jakarta.annotation.PostConstruct;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,6 +30,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequiredArgsConstructor
 public class MemberController{
+
+    private final MemberService memberService;
+
     @GetMapping("/")
     public String loginForm(@ModelAttribute("login") Login login) {
         return "/member/loginForm";
@@ -37,7 +42,13 @@ public class MemberController{
     @PostMapping("/member/login")
     public String login(@ModelAttribute("login") Login login){
 
-        return "/member/loginForm";
+         Login foundMember = memberService.findByEmail(login);
+         if(foundMember == null){
+             return "fail";
+         }
+         log.info("foundMember = {}", foundMember);
+
+         return "/member/loginForm";
     }
 
 }

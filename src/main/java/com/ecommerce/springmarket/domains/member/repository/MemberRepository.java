@@ -1,6 +1,7 @@
 package com.ecommerce.springmarket.domains.member.repository;
 
 import com.ecommerce.springmarket.domains.member.domain.Member;
+import com.ecommerce.springmarket.domains.member.dtos.Login;
 
 import java.util.Optional;
 
