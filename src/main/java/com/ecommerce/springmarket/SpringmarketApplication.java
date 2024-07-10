@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 @SpringBootApplication(exclude = SecurityAutoConfiguration.class)
 public class SpringmarketApplication {
 
-	@Autowired
-	private  MemberService memberService;
 	public static void main(String[] args) {
 		SpringApplication.run(SpringmarketApplication.class, args);
 	}
