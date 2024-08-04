@@ -26,13 +26,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 public class DataInit {
 
     private final MemberService memberService;
-    @PostConstruct
+  //  @PostConstruct
     public void login(){
-        Login login = new Login();
-        login.setEmail("test@email.com");
-        login.setPwd("1111");
-        Login savedMember =  memberService.save(login);
-        log.info("saveMember = {}", savedMember);
+//        Login login = new Login();
+//        login.setEmail("test@email.com");
+//        login.setPwd("1111");
+//        Login savedMember =  memberService.save(login);
+//        log.info("saveMember = {}", savedMember);
 
     }
 }

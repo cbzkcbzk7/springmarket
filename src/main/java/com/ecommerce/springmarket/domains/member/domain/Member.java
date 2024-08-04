@@ -39,8 +39,8 @@ public class Member {
 
     public static Login of(Member member){
         return Login.builder()
-                .email(member.getEmail())
-                .pwd(member.getPwd())
+                .user(member.getEmail())
+                .password(member.getPwd())
                 .build();
     }
 }

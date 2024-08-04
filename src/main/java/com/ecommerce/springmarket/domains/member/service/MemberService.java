@@ -15,8 +15,8 @@ import com.ecommerce.springmarket.domains.member.dtos.Login;
  */
 public interface MemberService {
 
-    Login save(Login login);
+//    Login save(Login login);
 
-    Login findByEmail(Login login);
+//    Login findByEmail(Login login);
 
 }

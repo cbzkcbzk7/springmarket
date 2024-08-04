@@ -29,38 +29,38 @@ public class MemberServiceImpl implements MemberService{
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
 
-    @Override
-    public Login save(Login login) {
-        String rawPassword = login.getPwd();
-        String encodedPassword = passwordEncoder.encode(rawPassword);
+//    @Override
+//    public Login save(Login login) {
+//        String rawPassword = login.getPwd();
+//        String encodedPassword = passwordEncoder.encode(rawPassword);
+//
+//        login.setPwd(encodedPassword);
+//        Member member = login.toEntity(login);
+//        memberRepository.save(member);
+//
+//        return member.of(member);
+//    }
 
-        login.setPwd(encodedPassword);
-        Member member = login.toEntity(login);
-        memberRepository.save(member);
+//    @Override
+//    public Login findByEmail(Login login) {
 
-        return member.of(member);
-    }
-
-    @Override
-    public Login findByEmail(Login login) {
-
-        try {
-            Member foundMember = memberRepository.findByEmail(login.getEmail()).get();
-
-            String tryPassword = login.getPwd();
-            String foundPassword = foundMember.getPwd();
-
-            if(matchPassword(tryPassword, foundPassword)) {
-                return null;
-            }
-
-            return foundMember.of(foundMember);
-
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+//        try {
+//            Member foundMember = memberRepository.findByEmail(login.getEmail()).get();
+//
+//            String tryPassword = login.getPwd();
+//            String foundPassword = foundMember.getPwd();
+//
+//            if(matchPassword(tryPassword, foundPassword)) {
+//                return null;
+//            }
+//
+//            return foundMember.of(foundMember);
+//
+//        } catch (Exception e) {
+//            throw new RuntimeException(e);
+//        }
         
-    }
+//    }
 
     private boolean matchPassword(String tryPassword, String foundPassword) {
         return !passwordEncoder.matches(tryPassword, foundPassword);

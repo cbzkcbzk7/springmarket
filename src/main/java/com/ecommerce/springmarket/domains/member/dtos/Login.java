@@ -24,15 +24,15 @@ import lombok.*;
 public class Login {
 
     @NotBlank
-    private String email;
+    private String user;
 
     @NotBlank
-    private String pwd;
+    private String password;
 
     public Member toEntity(Login login){
         return Member.builder()
-                .email(login.email)
-                .pwd(login.pwd)
+                .email(login.user)
+                .pwd(login.password)
                 .build();
     }
 }

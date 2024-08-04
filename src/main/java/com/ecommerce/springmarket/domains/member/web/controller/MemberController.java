@@ -40,15 +40,16 @@ public class MemberController{
 
     // @Valid : error 메세지를 위한 validation
     @PostMapping("/member/login")
-    public String login(@ModelAttribute("login") Login login){
+    public String login(){
+        System.out.println("test!!!!!!!!!");
 
-         Login foundMember = memberService.findByEmail(login);
-         if(foundMember == null){
-             return "fail";
-         }
-         log.info("foundMember = {}", foundMember);
+//         Login foundMember = memberService.findByEmail(login);
+//         if(foundMember == null){
+//             return "fail";
+//         }
+//         log.info("foundMember = {}", foundMember);
 
-         return "/member/loginForm";
+         return "/admin/adminLoginForm";
     }
 
 }
